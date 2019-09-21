@@ -2,39 +2,29 @@ import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
 
 export class User extends Component {
-  getUserName() {
+  getUserName = () => {
     return `${this.props.user.firstName} ${this.props.user.lastName}`;
-  }
+  };
+  isActive = () => {
+    return this.props.user.id === this.props.loggedUserID;
+  };
 
-  getChildWorkers() {
-    return this.props.users.filter(
-      user => user.managerId === this.props.user.id
-    );
-  }
-
-  isActive() {
-    return this.props.user.id === this.props.userID;
-  }
-
-  action(e) {
+  action = e => {
     e.stopPropagation();
-  }
+  };
 
   render() {
     return (
       <div className="User">
         <ListGroup>
-          <ListGroup.Item
-            active={this.isActive()}
-            onClick={this.action.bind(this)}
-          >
+          <ListGroup.Item active={this.isActive()} onClick={this.action}>
             {this.getUserName()}
-            {this.getChildWorkers().map(user => (
+            {this.props.getChildren(this.props.user.id).map(user => (
               <User
                 key={user.id}
-                userID={this.props.userID}
+                loggedUserID={this.props.loggedUserID}
                 user={user}
-                users={this.props.users}
+                getChildren={this.props.getChildren}
               />
             ))}
           </ListGroup.Item>

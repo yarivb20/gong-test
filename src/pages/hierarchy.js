@@ -13,21 +13,24 @@ export default class Hierarchy extends Component {
       let user = users.filter(user => user.id === this.props.userID);
       let name = this.getUserName(user),
         firstUsers = this.getFirstUsersTree(users);
-      console.log(name, users, firstUsers);
       this.setState({ name, users, firstUsers });
     });
   }
 
-  getUserName(user) {
+  getUserName = user => {
     if (user[0]) {
       return `${user[0].firstName} ${user[0].lastName}`;
     }
     return "";
-  }
+  };
 
-  getFirstUsersTree(users) {
+  getFirstUsersTree = users => {
     return users.filter(user => !user.managerId);
-  }
+  };
+
+  getChildren = userID => {
+    return this.state.users.filter(user => user.managerId === userID);
+  };
 
   render() {
     return (
@@ -36,9 +39,9 @@ export default class Hierarchy extends Component {
         {this.state.firstUsers.map(user => (
           <User
             key={user.id}
-            userID={this.props.userID}
+            loggedUserID={this.props.userID}
             user={user}
-            users={this.state.users}
+            getChildren={this.getChildren}
           />
         ))}
       </div>

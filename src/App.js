@@ -9,25 +9,22 @@ export default class App extends Component {
     super();
     this.state = { userID: null };
   }
-  onLoginSuccessful(userID) {
+  onLoginSuccessful = userID => {
     let userLoggedIn = true;
     this.setState({ userLoggedIn, userID });
-  }
-  onLogout() {
+  };
+  onLogout = () => {
     let userLoggedIn = false,
       userID = null;
     this.setState({ userLoggedIn, userID });
-  }
+  };
   render() {
     return (
       <div className="App">
         {this.state.userID !== null ? (
-          <Hierarchy
-            userID={this.state.userID}
-            onLogout={this.onLogout.bind(this)}
-          />
+          <Hierarchy userID={this.state.userID} onLogout={this.onLogout} />
         ) : (
-          <Login onLoginSuccessful={this.onLoginSuccessful.bind(this)} />
+          <Login onLoginSuccessful={this.onLoginSuccessful} />
         )}
       </div>
     );
