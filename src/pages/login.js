@@ -16,7 +16,7 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <h3 className="login-title">Please Login</h3>
-        <Form onSubmit={this.handleSubmit}>
+        <Form className="login-form" onSubmit={this.handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
