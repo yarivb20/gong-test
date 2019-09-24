@@ -45,6 +45,16 @@ class Comm {
     );
   }
 
+  deleteUser(userID) {
+    let userIndex = this._getUserIndex();
+    if (userIndex === -1) {
+      return;
+    }
+    return axios.delete(
+      `https://gongfetest.firebaseio.com/users/${userIndex}.json`
+    );
+  }
+
   _getUserIndex(userID) {
     return this.users.findIndex(user => user.id === userID);
   }

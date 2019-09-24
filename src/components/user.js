@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
+import UserCard from "./userCard"
 
 export class User extends Component {
   getUserName = () => {
@@ -17,8 +18,8 @@ export class User extends Component {
     return (
       <div className="User">
         <ListGroup>
-          <ListGroup.Item active={this.isActive()} onClick={this.action}>
-            {this.getUserName()}
+        <ListGroup.Item active={this.isActive()} onClick={this.action}>
+        <UserCard user={this.props.user}/>
             {this.props.getChildren(this.props.user.id).map(user => (
               <User
                 key={user.id}
